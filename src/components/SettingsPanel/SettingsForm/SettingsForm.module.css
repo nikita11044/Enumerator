@@ -1,0 +1,14 @@
+.display {
+    padding: 15.5px;
+    margin: 29px 32px;
+    border: 1px solid #1687a7;
+    border-radius: 3px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+input {
+    width: 80px;
+    text-align: center;
+}

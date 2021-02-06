@@ -15,28 +15,6 @@
     background-color: #d3e0ea;
 }
 
-.value-display {
-    padding: 15.5px;
-    margin: 29px 32px;
-    border: 1px solid #1687a7;
-    border-radius: 3px;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 10px;
-}
-
-.value-display input {
-    width: 80px;
-    text-align: center;
-}
-
-.number-display {
-    padding: 28px;
-    margin: 33px;
-    border: 1px solid #1687a7;
-    border-radius: 3px;
-}
-
 .button-wrapper {
     border: 1px solid #1687a7;
     border-radius: 3px;
@@ -50,10 +28,4 @@
     border-radius: 3px;
     color: #1687a7;
     font-weight: bold;
-}
-
-.number-panel .button-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 60px
 }
