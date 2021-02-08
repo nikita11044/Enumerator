@@ -34,12 +34,18 @@ function App() {
         localStorage.setItem('maxNumber', JSON.stringify(maxValue))
         localStorage.setItem('minNumber', JSON.stringify(minValue))
         localStorage.setItem('displayValue', JSON.stringify(displayedValue))
+        localStorage.setItem('setButtonDisabled', JSON.stringify(setButtonDisabledCondition))
+        localStorage.setItem('incButtonDisabled', JSON.stringify(incButtonDisabledCondition))
+        localStorage.setItem('resetButtonDisabled', JSON.stringify(resetButtonDisabledCondition))
     }
 
     const getValuesFromLocalStorage = () => {
         const max = localStorage.getItem('maxNumber')
         const min = localStorage.getItem('minNumber')
         const displayedValue = localStorage.getItem('displayValue')
+        const setButtonDisabled = localStorage.getItem('setButtonDisabled')
+        const incButtonDisabled = localStorage.getItem('incButtonDisabled')
+        const resetButtonDisabled = localStorage.getItem('resetButtonDisabled')
 
         if (max) {
             setMaxValue(JSON.parse(max))
@@ -51,6 +57,18 @@ function App() {
 
         if (displayedValue) {
             setDisplayedValue(JSON.parse(displayedValue))
+        }
+
+        if(setButtonDisabled) {
+            setSetButtonDisabledCondition(JSON.parse(setButtonDisabled))
+        }
+
+        if(incButtonDisabled) {
+            setIncButtonDisabledCondition(JSON.parse(incButtonDisabled))
+        }
+
+        if(resetButtonDisabled) {
+            setResetButtonDisabledCondition(JSON.parse(resetButtonDisabled))
         }
     }
 
@@ -80,12 +98,11 @@ function App() {
 
     useEffect(() => {
         getValuesFromLocalStorage()
-        setDisplayedValue('Set values')
     }, [])
 
     useEffect(() => {
         setValuesToLocalStorage()
-    }, [maxValue, minValue, displayedValue])
+    }, [maxValue, minValue, displayedValue, setButtonDisabledCondition, incButtonDisabledCondition, resetButtonDisabledCondition])
 
     return (
         <div className="App">
