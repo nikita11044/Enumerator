@@ -7,7 +7,7 @@ function App() {
     const [maxValue, setMaxValue] = useState<string>('0')
     const [minValue, setMinValue] = useState<string>('0')
     const [displayedValue, setDisplayedValue] = useState<string>('Set values and click the button')
-    // const [isMaxNumber, setIsMaxNumber] = useState<boolean>(false)
+    const [error, setError] = useState<boolean>(false)
     const [setButtonDisabledCondition, setSetButtonDisabledCondition] = useState<boolean>(true)
     const [incButtonDisabledCondition, setIncButtonDisabledCondition] = useState<boolean>(false)
     const [resetButtonDisabledCondition, setResetButtonDisabledCondition] = useState<boolean>(false)
@@ -19,15 +19,35 @@ function App() {
         if (currentValue) {
             switch (currentID) {
                 case 'maxNumber':
+                    if (Number(currentValue) <= Number(minValue)) {
+                        setError(true)
+                        setSetButtonDisabledCondition(true)
+                        setIncButtonDisabledCondition(true)
+                        setResetButtonDisabledCondition(true)
+                    } else {
+                        setError(false)
+                        setSetButtonDisabledCondition(false)
+                        setIncButtonDisabledCondition(false)
+                        setResetButtonDisabledCondition(false)
+                    }
                     setMaxValue(currentValue)
-                    break;
+                    break
                 case 'minNumber' :
+                    if (Number(currentValue) >= Number(maxValue)) {
+                        setError(true)
+                        setSetButtonDisabledCondition(true)
+                        setIncButtonDisabledCondition(true)
+                        setResetButtonDisabledCondition(true)
+                    } else {
+                        setError(false)
+                        setSetButtonDisabledCondition(false)
+                        setIncButtonDisabledCondition(false)
+                        setResetButtonDisabledCondition(false)
+                    }
                     setMinValue(currentValue)
-                    break;
+                    break
             }
         }
-
-        setSetButtonDisabledCondition(false)
     }
 
     const setValuesToLocalStorage = () => {
@@ -59,15 +79,15 @@ function App() {
             setDisplayedValue(JSON.parse(displayedValue))
         }
 
-        if(setButtonDisabled) {
+        if (setButtonDisabled) {
             setSetButtonDisabledCondition(JSON.parse(setButtonDisabled))
         }
 
-        if(incButtonDisabled) {
+        if (incButtonDisabled) {
             setIncButtonDisabledCondition(JSON.parse(incButtonDisabled))
         }
 
-        if(resetButtonDisabled) {
+        if (resetButtonDisabled) {
             setResetButtonDisabledCondition(JSON.parse(resetButtonDisabled))
         }
     }
@@ -81,11 +101,11 @@ function App() {
         const display = Number(displayedValue)
         const max = Number(maxValue)
 
-        if(display < max) {
+        if (display < max) {
             setDisplayedValue(`${display + 1}`)
         }
 
-        if((display + 1) === max) {
+        if ((display + 1) === max) {
             setIncButtonDisabledCondition(true)
         }
     }
@@ -106,8 +126,11 @@ function App() {
 
     return (
         <div className="App">
-            <SettingsPanel updateValue={updateValue} updateDisplay={updateDisplay} maxValue={maxValue} minValue={minValue} setButtonDisabledCondition={setButtonDisabledCondition}/>
-            <ControlPanel increment={increment} reset={reset} displayedValue={displayedValue} incButtonDisabledCondition={incButtonDisabledCondition}/>
+            <SettingsPanel updateValue={updateValue} updateDisplay={updateDisplay} maxValue={maxValue}
+                           minValue={minValue} setButtonDisabledCondition={setButtonDisabledCondition} error={error}/>
+            <ControlPanel increment={increment} reset={reset} displayedValue={displayedValue}
+                          incButtonDisabledCondition={incButtonDisabledCondition}
+                          resetButtonDisabledCondition={resetButtonDisabledCondition} error={error}/>
         </div>
     );
 }

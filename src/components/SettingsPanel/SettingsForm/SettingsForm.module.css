@@ -12,3 +12,7 @@ input {
     width: 80px;
     text-align: center;
 }
+
+.error {
+    color: red;
+}
