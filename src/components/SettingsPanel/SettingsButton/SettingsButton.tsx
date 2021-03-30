@@ -1,15 +1,10 @@
 import React from 'react';
 import CustomButton from "../../CustomButton/CustomButton";
 
-type SettingsButtonPropsType = {
-    updateDisplay: () => void
-    setButtonDisabledCondition: boolean
-}
-
-const SettingsButton: React.FC<SettingsButtonPropsType> = ({updateDisplay, setButtonDisabledCondition}) => {
+const SettingsButton: React.FC = () => {
     return (
             <div className='button-wrapper'>
-                <CustomButton callback={updateDisplay} buttonText={'set'} disabled={setButtonDisabledCondition}/>
+                <CustomButton buttonText={'set'}/>
             </div>
     );
 }
