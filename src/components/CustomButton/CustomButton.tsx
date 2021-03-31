@@ -1,17 +1,15 @@
 import React from 'react';
 import classes from './CustomButton.module.css'
-import {useSelector} from "react-redux";
-import {AppStateType} from "../../redux/store";
 
 type CustomButtonPropsType = {
     buttonText: string
+    callback: () => void
+    disabledCondition: boolean
 }
 
-const CustomButton: React.FC<CustomButtonPropsType> = ({buttonText}) => {
-    const error = useSelector<AppStateType, boolean>(state => state.enumerator.error)
-
+const CustomButton: React.FC<CustomButtonPropsType> = ({buttonText, callback, disabledCondition}) => {
     return (
-        <button disabled={error} className={error ? `${classes.button} ${classes.disabled}` : classes.button}>{buttonText}</button>
+        <button disabled={disabledCondition} className={disabledCondition ? `${classes.button} ${classes.disabled}` : classes.button} onClick={callback}>{buttonText}</button>
     );
 }
 

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import SettingsPanel from "./components/SettingsPanel/SettingsPanel";
 import ControlPanel from "./components/ControlPanel/ControlPanel";

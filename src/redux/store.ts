@@ -1,17 +1,17 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {enumeratorReducer} from "./enumerator-reducer";
+import thunk from "redux-thunk";
+import {loadState, saveSate} from "../utils/localstorage-utils";
 
 const rootReducer = combineReducers({
     enumerator: enumeratorReducer
 })
 
-export const store = createStore(rootReducer)
+export const store = createStore(rootReducer, loadState(), applyMiddleware(thunk))
 
-// store.subscribe(() => {
-//     localStorage.setItem('maxNumber', JSON.stringify(store.getState().enumerator.maxNumber))
-//     localStorage.setItem('minNumber', JSON.stringify(store.getState().enumerator.minNumber))
-//     localStorage.setItem('displayValue', JSON.stringify(store.getState().enumerator.displayedNumber))
-// })
+store.subscribe(() => {
+    saveSate(store.getState())
+})
 
 export type AppStateType = ReturnType<typeof rootReducer>
 export type AppStoreType = typeof store
